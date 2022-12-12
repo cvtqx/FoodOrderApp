@@ -95,7 +95,7 @@ function create(req, res){
 
 function orderExists(req, res, next){
     const {orderId} = req.params;
-    const foundOrder = orders.find(order => order.id == Number(orderId));
+    const foundOrder = orders.find(order => order.id === orderId);
     if(foundOrder){
         res.locals.order = foundOrder;
         return next();
@@ -135,7 +135,7 @@ function validateNewId(req, res, next) {
   const { orderId } = req.params;
   const { data: { id } = {} } = req.body;
 
-  if (id && id != Number(orderId)) {
+  if (id && id !== orderId) {
     return next({
       status: 400,
       message: `Order id does not match route id. Order: ${id}, Route: ${orderId}`,

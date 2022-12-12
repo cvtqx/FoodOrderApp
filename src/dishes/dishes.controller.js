@@ -71,7 +71,8 @@ function create(req, res){
 //find dish by id 
 function dishExists(req, res, next){
     const {dishId} = req.params;
-    const foundDish = dishes.find(dish => dish.id == Number(dishId));
+
+    const foundDish = dishes.find(dish => dish.id === dishId);
     if(foundDish){
         res.locals.dish = foundDish;
         return next();
@@ -90,7 +91,7 @@ function validateNewId(req, res, next){
     const {dishId} = req.params;
     const {data: {id} = {}} = req.body;
 
-    if(id && id != Number(dishId)){
+    if(id && id !== dishId){
         return next({
                     status: 400,
                     message: `Dish id does not match route id. Dish: ${id}, Route: ${dishId}`,
